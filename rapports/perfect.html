@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport d'Analyse de Graphes - Université de Yaoundé I</title>
+    
+        <style>
+            body {
+                font-family: 'Times New Roman', serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                background: #f9f9f9;
+                color: #333;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: white;
+                padding: 40px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                border-radius: 5px;
+            }
+            
+            .header {
+                text-align: center;
+                border-bottom: 3px solid #2c3e50;
+                padding-bottom: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .university {
+                font-size: 18px;
+                font-weight: bold;
+                color: #2c3e50;
+                margin-bottom: 5px;
+            }
+            
+            .department {
+                font-size: 16px;
+                color: #34495e;
+                margin-bottom: 10px;
+            }
+            
+            .title {
+                font-size: 24px;
+                font-weight: bold;
+                color: #2c3e50;
+                margin: 20px 0;
+                text-transform: uppercase;
+            }
+            
+            .supervisor {
+                font-size: 14px;
+                color: #7f8c8d;
+                margin-bottom: 10px;
+            }
+            
+            .members {
+                text-align: left;
+                margin-top: 20px;
+                padding: 15px;
+                background: #ecf0f1;
+                border-radius: 5px;
+            }
+            
+            .members h4 {
+                color: #2c3e50;
+                margin-bottom: 10px;
+            }
+            
+            .section {
+                margin: 30px 0;
+                padding: 20px;
+                border-left: 4px solid #3498db;
+                background: #f8f9fa;
+            }
+            
+            .section h2 {
+                color: #2c3e50;
+                border-bottom: 2px solid #3498db;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .section h3 {
+                color: #34495e;
+                margin-top: 25px;
+                margin-bottom: 15px;
+            }
+            
+            .results-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+                background: white;
+            }
+            
+            .results-table th,
+            .results-table td {
+                border: 1px solid #bdc3c7;
+                padding: 12px;
+                text-align: left;
+            }
+            
+            .results-table th {
+                background: #3498db;
+                color: white;
+                font-weight: bold;
+            }
+            
+            .results-table tr:nth-child(even) {
+                background: #f8f9fa;
+            }
+            
+            .matrix {
+                font-family: 'Courier New', monospace;
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            
+            .highlight {
+                background: #f1c40f;
+                padding: 2px 5px;
+                border-radius: 3px;
+                font-weight: bold;
+            }
+            
+            .important {
+                background: #e74c3c;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                margin: 15px 0;
+            }
+            
+            .footer {
+                text-align: center;
+                margin-top: 40px;
+                padding-top: 20px;
+                border-top: 2px solid #bdc3c7;
+                color: #7f8c8d;
+                font-size: 12px;
+            }
+            
+            .code-block {
+                background: #f4f4f4;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 15px;
+                font-family: 'Courier New', monospace;
+                margin: 10px 0;
+                overflow-x: auto;
+            }
+            
+            .architecture-diagram {
+                text-align: center;
+                margin: 20px 0;
+                padding: 20px;
+                background: #ecf0f1;
+                border-radius: 5px;
+            }
+            
+            .tech-stack {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin: 15px 0;
+            }
+            
+            .tech-item {
+                background: #3498db;
+                color: white;
+                padding: 8px 15px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: bold;
+            }
+            
+            @media print {
+                body { background: white; }
+                .container { box-shadow: none; }
+                .section { break-inside: avoid; }
+            }
+        </style>
+        
+</head>
+<body>
+    <div class="container">
+        
+        <div class="header">
+            <div class="university">UNIVERSITÉ DE YAOUNDÉ I</div>
+            <div class="department">DÉPARTEMENT D'INFORMATIQUE</div>
+            <div class="department">Licence 2</div>
+            <div class="title">Rapport d'Analyse de Graphes</div>
+            <div class="supervisor">Supervisé par Dr Manga MAXWELL</div>
+            
+            <div class="members">
+                <h4>Membres du Groupe:</h4>
+                <ul style="text-align: left; list-style-type: none; padding-left: 0;">
+                    <li>• DIZE TCHEMOU MIGUEL CAREY</li>
+                    <li>• SAGUEN KAMDEM CHERYL RONALD</li>
+                    <li>• SIGNE FONGANG WILFRIED BRANDON</li>
+                </ul>
+            </div>
+            
+            <div style="margin-top: 20px; font-size: 14px; color: #7f8c8d;">
+                Rapport généré le 08/06/2025
+            </div>
+        </div>
+        
+        
+        <div class="section">
+            <h2>1. INTRODUCTION</h2>
+            <p>
+                Ce rapport présente l'analyse détaillée d'un programme d'analyse de graphes développé 
+                dans le cadre du cours de structures de données avancées. L'objectif principal est 
+                de créer un outil capable de lire et d'analyser différentes représentations de graphes, 
+                en particulier pour déterminer les degrés minimum et maximum des sommets.
+            </p>
+            
+            <h3>1.1 Objectifs du Projet</h3>
+            <ul>
+                <li>Développer un analyseur de graphes modulaire et extensible</li>
+                <li>Implémenter la lecture de matrices et listes d'adjacence</li>
+                <li>Calculer les propriétés fondamentales des graphes</li>
+                <li>Fournir une interface utilisateur intuitive</li>
+                <li>Générer des rapports d'analyse professionnels</li>
+            </ul>
+            
+            <h3>1.2 Problématique</h3>
+            <p>
+                L'analyse de graphes est fondamentale en informatique, intervenant dans de nombreux 
+                domaines comme les réseaux sociaux, les systèmes de transport, ou l'optimisation. 
+                Notre programme répond au besoin d'un outil polyvalent capable de traiter différents 
+                types de graphes et d'en extraire des informations pertinentes.
+            </p>
+        </div>
+        
+        
+        <div class="section">
+            <h2>2. ARCHITECTURE DU SYSTÈME</h2>
+            
+            <div class="architecture-diagram">
+                <h3>Architecture Modulaire</h3>
+                <div style="font-family: monospace; font-size: 14px; line-height: 2;">
+                    ┌─────────────────────────────────┐<br>
+                    │     Interface Utilisateur       │<br>
+                    │    (graph_analyzer.py)         │<br>
+                    └─────────────┬───────────────────┘<br>
+                                  │<br>
+                    ┌─────────────┴───────────────────┐<br>
+                    │      Module Core d'Analyse      │<br>
+                    │       (graph_core.py)          │<br>
+                    └─────────────┬───────────────────┘<br>
+                                  │<br>
+                    ┌─────────────┴───────────────────┐<br>
+                    │    Générateur de Rapports       │<br>
+                    │   (report_generator.py)        │<br>
+                    └─────────────────────────────────┘
+                </div>
+            </div>
+            
+            <h3>2.1 Composants Principaux</h3>
+            
+            <h4>Module Interface (graph_analyzer.py)</h4>
+            <ul>
+                <li><strong>GraphAnalyzerGUI</strong> : Interface graphique principale</li>
+                <li>Gestion des événements utilisateur</li>
+                <li>Visualisation des graphes avec NetworkX et Matplotlib</li>
+                <li>Integration des différents modules</li>
+            </ul>
+            
+            <h4>Module Core (graph_core.py)</h4>
+            <ul>
+                <li><strong>GraphAnalyzer</strong> : Classe principale d'analyse</li>
+                <li>Parsing des matrices et listes d'adjacence</li>
+                <li>Algorithmes de calcul des propriétés</li>
+                <li>Détection de connexité et composantes</li>
+            </ul>
+            
+            <h4>Module Rapports (report_generator.py)</h4>
+            <ul>
+                <li><strong>ReportGenerator</strong> : Génération de rapports HTML</li>
+                <li>Templates CSS professionnels</li>
+                <li>Formatage automatique des résultats</li>
+            </ul>
+            
+            <h3>2.2 Avantages de cette Architecture</h3>
+            <ul>
+                <li><strong>Modularité</strong> : Chaque composant a une responsabilité claire</li>
+                <li><strong>Extensibilité</strong> : Facilité d'ajout de nouvelles fonctionnalités</li>
+                <li><strong>Maintenabilité</strong> : Code organisé et documenté</li>
+                <li><strong>Réutilisabilité</strong> : Modules indépendants réutilisables</li>
+            </ul>
+        </div>
+        
+        
+        <div class="section">
+            <h2>3. FONCTIONNALITÉS IMPLÉMENTÉES</h2>
+            
+            <h3>3.1 Lecture de Graphes</h3>
+            <p>Le programme supporte deux formats d'entrée :</p>
+            
+            <h4>Matrice d'Adjacence</h4>
+            <div class="code-block">
+Format: Matrice carrée n×n où A[i][j] représente le nombre d'arêtes entre i et j
+Exemple:
+0 1 1 0
+1 0 0 1  
+1 0 0 1
+0 1 1 0
+            </div>
+            
+            <h4>Liste d'Adjacence</h4>
+            <div class="code-block">
+Format: Chaque ligne indique un sommet et ses voisins
+Exemple:
+0: 1 2
+1: 0 3
+2: 0 3  
+3: 1 2
+            </div>
+            
+            <h3>3.2 Analyses Disponibles</h3>
+            <table class="results-table">
+                <tr>
+                    <th>Fonctionnalité</th>
+                    <th>Description</th>
+                    <th>Complexité</th>
+                </tr>
+                <tr>
+                    <td>Calcul des degrés</td>
+                    <td>Degré de chaque sommet, min/max/moyenne</td>
+                    <td>O(V + E)</td>
+                </tr>
+                <tr>
+                    <td>Détection de boucles</td>
+                    <td>Identification des arêtes vers soi-même</td>
+                    <td>O(V + E)</td>
+                </tr>
+                <tr>
+                    <td>Test de connexité</td>
+                    <td>Vérification si le graphe est connexe</td>
+                    <td>O(V + E)</td>
+                </tr>
+                <tr>
+                    <td>Composantes connexes</td>
+                    <td>Nombre de composantes du graphe</td>
+                    <td>O(V + E)</td>
+                </tr>
+                <tr>
+                    <td>Visualisation</td>
+                    <td>Représentation graphique interactive</td>
+                    <td>O(V²)</td>
+                </tr>
+            </table>
+            
+            <h3>3.3 Interface Utilisateur</h3>
+            <ul>
+                <li><strong>Saisie flexible</strong> : Texte libre ou chargement de fichier</li>
+                <li><strong>Guide intégré</strong> : Instructions détaillées pour l'utilisation</li>
+                <li><strong>Visualisation temps réel</strong> : Graphe affiché automatiquement</li>
+                <li><strong>Résultats détaillés</strong> : Analyse complète avec statistiques</li>
+                <li><strong>Export de rapports</strong> : Génération HTML professionnelle</li>
+            </ul>
+        </div>
+        
+        
+        <div class="section">
+            <h2>4. TECHNOLOGIES UTILISÉES</h2>
+            
+            <div class="tech-stack">
+                <span class="tech-item">Python 3.8+</span>
+                <span class="tech-item">Tkinter</span>
+                <span class="tech-item">NumPy</span>
+                <span class="tech-item">NetworkX</span>
+                <span class="tech-item">Matplotlib</span>
+                <span class="tech-item">HTML/CSS</span>
+            </div>
+            
+            <h3>4.1 Justification des Choix Technologiques</h3>
+            
+            <h4>Python</h4>
+            <ul>
+                <li>Langage adapté aux algorithmes de graphes</li>
+                <li>Riche écosystème de bibliothèques scientifiques</li>
+                <li>Syntaxe claire et maintenir facilement</li>
+                <li>Excellent support pour les structures de données</li>
+            </ul>
+            
+            <h4>Tkinter</h4>
+            <ul>
+                <li>Interface graphique native Python</li>
+                <li>Aucune dépendance externe</li>
+                <li>Suffisant pour les besoins du projet</li>
+                <li>Portable sur tous les systèmes</li>
+            </ul>
+            
+            <h4>NumPy</h4>
+            <ul>
+                <li>Manipulation efficace des matrices</li>
+                <li>Opérations vectorielles optimisées</li>
+                <li>Interface simple pour les calculs numériques</li>
+            </ul>
+            
+            <h4>NetworkX</h4>
+            <ul>
+                <li>Bibliothèque spécialisée en théorie des graphes</li>
+                <li>Algorithmes de layout avancés</li>
+                <li>Intégration native avec Matplotlib</li>
+                <li>Validation des résultats de nos algorithmes</li>
+            </ul>
+            
+            <h4>Matplotlib</h4>
+            <ul>
+                <li>Visualisation scientifique de référence</li>
+                <li>Integration Tkinter native</li>
+                <li>Personnalisation avancée des graphiques</li>
+            </ul>
+        </div>
+        
+        
+        <div class="section">
+            <h2>5. RÉSULTATS DE L'ANALYSE</h2>
+            
+            <div class="important">
+                <strong>Graphe Analysé:</strong> 3 sommets, 
+                2 arêtes, 
+                Type: Non-orienté
+            </div>
+            
+            <h3>5.1 Propriétés Générales</h3>
+            <table class="results-table">
+                <tr>
+                    <th>Propriété</th>
+                    <th>Valeur</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Nombre de sommets</td>
+                    <td class="highlight">3</td>
+                    <td>Cardinalité de l'ensemble des sommets V</td>
+                </tr>
+                <tr>
+                    <td>Nombre d'arêtes</td>
+                    <td class="highlight">2</td>
+                    <td>Cardinalité de l'ensemble des arêtes E</td>
+                </tr>
+                <tr>
+                    <td>Type de graphe</td>
+                    <td class="highlight">Non-orienté</td>
+                    <td>Direction des arêtes</td>
+                </tr>
+                <tr>
+                    <td>Présence de boucles</td>
+                    <td class="highlight">Non</td>
+                    <td>Arêtes reliant un sommet à lui-même</td>
+                </tr>
+                <tr>
+                    <td>Graphe connexe</td>
+                    <td class="highlight">Oui</td>
+                    <td>Existence d'un chemin entre toute paire de sommets</td>
+                </tr>
+                <tr>
+                    <td>Composantes connexes</td>
+                    <td class="highlight">1</td>
+                    <td>Nombre de sous-graphes connexes maximaux</td>
+                </tr>
+            </table>
+            
+            <h3>5.2 Analyse des Degrés</h3>
+            <p>
+                Le degré d'un sommet représente le nombre d'arêtes qui lui sont incidentes. 
+                Cette mesure est fondamentale pour comprendre l'importance relative des sommets 
+                dans la structure du graphe.
+            </p>
+            
+            <table class="results-table">
+                <tr>
+                    <th>Statistique</th>
+                    <th>Valeur</th>
+                    <th>Interprétation</th>
+                </tr>
+                <tr>
+                    <td><strong>Degré Minimum</strong></td>
+                    <td class="highlight">1</td>
+                    <td>Sommet le moins connecté du graphe</td>
+                </tr>
+                <tr>
+                    <td><strong>Degré Maximum</strong></td>
+                    <td class="highlight">2</td>
+                    <td>Sommet le plus connecté du graphe</td>
+                </tr>
+                <tr>
+                    <td>Degré Moyen</td>
+                    <td class="highlight">1.33</td>
+                    <td>Connectivité moyenne dans le graphe</td>
+                </tr>
+            </table>
+            
+            <h3>5.3 Distribution des Degrés</h3>
+            <table class="results-table">
+                <tr>
+                    <th>Sommet</th>
+                    <th>Degré</th>
+                    <th>Pourcentage du Total</th>
+                </tr>
+                
+                <tr>
+                    <td>Sommet 0</td>
+                    <td>1</td>
+                    <td>25.0%</td>
+                </tr>
+            
+                <tr>
+                    <td>Sommet 1</td>
+                    <td>1</td>
+                    <td>25.0%</td>
+                </tr>
+            
+                <tr>
+                    <td>Sommet 2</td>
+                    <td>2</td>
+                    <td>50.0%</td>
+                </tr>
+            
+            </table>
+            
+            
+            
+            <h3>5.4 Représentation Matricielle</h3>
+            <p>Matrice d'adjacence du graphe analysé :</p>
+            
+            <div class="matrix">
+                <strong>Matrice d'Adjacence:</strong><br>
+                <pre> 0  0  1\n 0  0  1\n 1  1  0\n</pre>
+            </div>
+            
+        </div>
+        
+        
+        <div class="section">
+            <h2>6. FONCTIONNEMENT GÉNÉRAL</h2>
+            
+            <h3>6.1 Algorithmes Implémentés</h3>
+            
+            <h4>Parsing des Données d'Entrée</h4>
+            <p>
+                Le programme analyse automatiquement le format d'entrée et applique le parser 
+                approprié. La robustesse du parsing permet de gérer différents formats de 
+                séparateurs et espaces.
+            </p>
+            
+            <h4>Calcul des Degrés</h4>
+            <div class="code-block">
+Algorithme pour graphe non-orienté:
+1. Pour chaque sommet v:
+   a. Compter les voisins dans la liste d'adjacence
+   b. Ajouter les boucles (comptées deux fois)
+   c. degree[v] = nombre_voisins + 2 * nombre_boucles
+
+Complexité: O(V + E) où V = sommets, E = arêtes
+            </div>
+            
+            <h4>Test de Connexité</h4>
+            <div class="code-block">
+Algorithme BFS (Breadth-First Search):
+1. Choisir un sommet de départ arbitraire
+2. Parcourir tous les sommets accessibles via BFS
+3. Le graphe est connexe si tous les sommets sont visités
+
+Complexité: O(V + E)
+            </div>
+            
+            <h4>Comptage des Composantes</h4>
+            <div class="code-block">
+Algorithme de parcours:
+1. Initialiser compteur = 0
+2. Pour chaque sommet non-visité:
+   a. Incrémenter compteur
+   b. Effectuer BFS pour marquer la composante
+3. Retourner compteur
+
+Complexité: O(V + E)
+            </div>
+            
+            <h3>6.2 Gestion des Cas Particuliers</h3>
+            <ul>
+                <li><strong>Graphes orientés vs non-orientés</strong> : Détection automatique</li>
+                <li><strong>Arêtes multiples</strong> : Support complet avec comptage</li>
+                <li><strong>Boucles</strong> : Détection et traitement spécial</li>
+                <li><strong>Graphes vides</strong> : Gestion des cas limites</li>
+                <li><strong>Sommets isolés</strong> : Prise en compte dans l'analyse</li>
+            </ul>
+            
+            <h3>6.3 Optimisations Implémentées</h3>
+            <ul>
+                <li>Utilisation de structures de données efficaces (defaultdict)</li>
+                <li>Algorithmes en temps linéaire pour la plupart des calculs</li>
+                <li>Mise en cache des résultats de calculs coûteux</li>
+                <li>Interface utilisateur responsive avec traitement asynchrone</li>
+            </ul>
+        </div>
+        
+        
+        <div class="section">
+            <h2>7. CONCLUSION</h2>
+            
+            <h3>7.1 Synthèse des Résultats</h3>
+            <p>
+                L'analyse du graphe soumis révèle une structure avec <strong>3 sommets</strong> 
+                et <strong>2 arêtes</strong>. Les degrés des sommets varient de 
+                <strong>1</strong> à <strong>2</strong>, 
+                avec une moyenne de <strong>1.33</strong>.
+            </p>
+            
+            <p>
+                Le graphe est <strong>connexe</strong> 
+                et comporte <strong>1 composante(s) connexe(s)</strong>.
+                Aucune boucle n'a été détectée 
+                dans cette structure.
+            </p>
+            
+            <h3>7.2 Objectifs Atteints</h3>
+            <ul>
+                <li>✅ Lecture efficace des matrices et listes d'adjacence</li>
+                <li>✅ Calcul précis des degrés minimum et maximum</li>
+                <li>✅ Interface utilisateur intuitive et guidée</li>
+                <li>✅ Architecture modulaire et extensible</li>
+                <li>✅ Gestion complète des cas particuliers</li>
+                <li>✅ Visualisation graphique des résultats</li>
+                <li>✅ Génération de rapports professionnels</li>
+            </ul>
+            
+            <h3>7.3 Perspectives d'Amélioration</h3>
+            <ul>
+                <li>Implémentation d'algorithmes de plus court chemin</li>
+                <li>Détection de cycles et arbres couvrants</li>
+                <li>Support des graphes pondérés</li>
+                <li>Export vers différents formats (GraphML, DOT)</li>
+                <li>Interface Web pour utilisation à distance</li>
+                <li>Analyses statistiques avancées</li>
+            </ul>
+            
+            <h3>7.4 Apprentissages</h3>
+            <p>
+                Ce projet nous a permis d'approfondir nos connaissances en théorie des graphes 
+                et en programmation modulaire. L'implémentation d'algorithmes classiques et 
+                le développement d'une interface utilisateur complète constituent une expérience 
+                formatrice significative.
+            </p>
+            
+            <p>
+                La rigueur exigée dans l'analyse algorithmique et la documentation technique 
+                renforce notre préparation aux défis de l'informatique professionnelle.
+            </p>
+        </div>
+        
+        
+        <div class="footer">
+            <p>
+                <strong>Université de Yaoundé I - Département d'Informatique</strong><br>
+                Licence 2 - Structures de Données Avancées<br>
+                Supervisé par Dr Manga MAXWELL<br>
+                Rapport généré automatiquement le 08/06/2025
+            </p>
+            <p style="margin-top: 15px; font-style: italic;">
+                "L'analyse de graphes révèle les structures cachées de nos données" 
+            </p>
+        </div>
+        
+    </div>
+</body>
+</html>
+        
